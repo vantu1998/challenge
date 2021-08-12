@@ -1,0 +1,12 @@
+<div class="job" *ngIf="job">
+  <img [src]="job.logo" class="job-logo" />
+  <div class="job-meta">
+    <!-- TODO: create a pipe for date -->
+    <span class="job-posted">{{ job.date }}</span>
+    <span>{{ job.type === JobType.FullTime ? "Full Time" : "Part Time" }}</span>
+  </div>
+  <div class="job-title">
+    <a [routerLink]="['/jobs', job.id]">{{ job.title }}</a>
+  </div>
+  <a href="#">{{ job.company }}</a>
+</div>
