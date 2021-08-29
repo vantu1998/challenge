@@ -26,3 +26,24 @@ export const addJobError = createAction(
 );
 
 // TODO: add additional actions for other CRUD operations
+
+export const addJob = createAction(
+  "[Jobs API] Add New Job",
+  props<{ job: Job }>()
+);
+
+export const deleteJob = createAction(
+  "[Jobs API] Delete Job",
+  props<{ job: Job }>()
+);
+
+export const deleteJobSuccess = createAction(
+  "[Jobs API] Delete Job Success",
+  props<{ job: Job }>()
+);
+export const deleteJobError = createAction(
+  "[Jobs API] Delete Job Error",
+  props<{
+    error: string;
+  }>()
+);

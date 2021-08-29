@@ -1,0 +1,28 @@
+<div class="container">
+  <form autocomplete="off" [formGroup]="formData">
+    <div class="d-flex flex-column">
+      <input formControlName="title" type="text" />
+      <input formControlName="logo" type="text" />
+      <input formControlName="company" type="text" />
+      <input formControlName="link" type="text" />
+      <input formControlName="date" type="text" />
+      <select formControlName="type">
+        <option value="0">Part time</option>
+        <option value="1">Full time</option>
+      </select>
+      <div class="d-flex justify-content-end mt-2">
+        <button class="btn btn-primary mr-3">
+          Create
+        </button>
+        <button class="btn btn-danger">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+
+</div>
+<pre>
+  {{formData.value  | json }}
+  {{formData.valid}}
+</pre>

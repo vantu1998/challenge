@@ -6,9 +6,21 @@ import { JobsRoutingModule } from "./jobs-routing.module";
 import { JobsComponent } from "./pages/jobs/jobs.component";
 import { JobComponent } from "./pages/jobs/job/job.component";
 import { JobDescriptionComponent } from "./pages/job-description/job-description.component";
+import { JobCreateComponent } from "./pages/job-create/job-create.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [JobsComponent, JobComponent, JobDescriptionComponent],
-  imports: [CommonModule, FontAwesomeModule, JobsRoutingModule],
+  declarations: [
+    JobsComponent,
+    JobComponent,
+    JobDescriptionComponent,
+    JobCreateComponent,
+  ],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    JobsRoutingModule,
+    ReactiveFormsModule,
+  ],
 })
 export class JobsModule {}

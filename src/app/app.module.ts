@@ -11,6 +11,9 @@ import { AppComponent } from "./app.component";
 import { reducers } from "./app.state";
 import { JobsEffects } from "./jobs/state/jobs.effects";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { AngularFireModule } from "@angular/fire/compat";
+import { firebaseConfig } from "src/environments/environment";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +27,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     }),
     EffectsModule.forRoot([JobsEffects]),
     FontAwesomeModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
