@@ -7,11 +7,12 @@
     </button>
   </header>
 
-  <div class="job-search py-2 my-2">
+  <div class="job-search py-2 my-2" [formGroup]="formData">
     <input
       type="text"
       placeholder="Search jobs"
       class="d-block my-2 p-2 w-100"
+      formControlName="title"
     />
   </div>
 

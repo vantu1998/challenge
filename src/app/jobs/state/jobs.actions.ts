@@ -77,3 +77,11 @@ export const getJobByIdFail = createAction(
     error: string;
   }>()
 );
+export const search = createAction(
+  "[Jobs API] Search post",
+  props<{ title?: string; typeJob?: number }>()
+);
+export const searchSuccess = createAction(
+  "[Jobs API] Search post success",
+  props<{ jobs: Job[] }>()
+);

@@ -79,11 +79,19 @@ const jobsReducer = createReducer<State>(
     };
   }),
   on(jobsActions.updateJobSuccess, (state, { job }) => {
-    const index = state.jobs.findIndex((item) => item.id === job.id);
+    const index = state.jobs.findIndex((item) => {
+      debugger;
+      return item.id === job.id;
+    });
     if (index >= 0) {
-      state.jobs[index] = job;
+      const data = [
+        ...state.jobs.slice(0, index),
+        job,
+        ...state.jobs.slice(index + 1),
+      ];
+      return { ...state, jobs: data, error: null, loading: false };
     }
-    return { ...state, selected: job, error: null, loading: false };
+    return { ...state, error: null, loading: false };
   }),
   on(jobsActions.updateJobError, (state, { error }) => {
     return { ...state, loading: false, error: error };
@@ -96,6 +104,12 @@ const jobsReducer = createReducer<State>(
   }),
   on(jobsActions.getJobByIdFail, (state, { error }) => {
     return { ...state, loading: false, error: error };
+  }),
+  on(jobsActions.searchSuccess, (state, { jobs }) => {
+    return {
+      ...state,
+      jobs,
+    };
   })
 );
 

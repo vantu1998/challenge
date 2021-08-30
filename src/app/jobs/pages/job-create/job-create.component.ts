@@ -16,6 +16,7 @@ import { getJobById, updateJob } from "../../state/jobs.actions";
 })
 export class JobCreateComponent implements OnInit {
   formData!: FormGroup;
+  job!: Job;
   jobType = [
     { value: 0, label: "Full time" },
     { value: 1, label: "Part time" },
@@ -44,6 +45,7 @@ export class JobCreateComponent implements OnInit {
       this.title = "Edit job";
       // @ts-ignore
       this.store.pipe(select(selectedJobSelector)).subscribe((data: Job) => {
+        this.job = JSON.parse(JSON.stringify(data));
         this.formData.patchValue(data);
       });
     } else {
@@ -74,7 +76,9 @@ export class JobCreateComponent implements OnInit {
   }
 
   updateJob() {
-    this.store.dispatch(updateJob({ job: this.formData.value }));
+    const job = this.formData.value;
+    job.id = this.job.id;
+    this.store.dispatch(updateJob({ job }));
   }
 }
 

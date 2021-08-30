@@ -72,6 +72,19 @@ export class JobsEffects {
       )
     )
   );
+  searchJobs = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromJobs.search),
+      switchMap((action) => {
+        console.log(action);
+        return this.jobsService.search(action.title, action.typeJob).pipe(
+          map((jobs) => {
+            return fromJobs.searchSuccess({ jobs });
+          })
+        );
+      })
+    )
+  );
 
   constructor(
     private actions$: Actions,
