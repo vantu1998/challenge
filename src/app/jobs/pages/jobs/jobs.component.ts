@@ -6,7 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Job } from "../../../shared/models/jobs";
 import * as jobsActions from "../../state/jobs.actions";
 import * as fromJobs from "../../state/jobs.reducer";
-import { JobsService } from "src/app/jobs.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-jobs",
@@ -17,17 +17,10 @@ export class JobsComponent implements OnInit {
   jobs$!: Observable<Job[]>;
   add = faPlus;
 
-  constructor(private store: Store, private jobService: JobsService) {}
+  constructor(private store: Store, private router: Router) {}
+
   ngOnInit(): void {
     this.store.dispatch(jobsActions.getJobs());
-
-    this.jobs$ = this.store.pipe(select(fromJobs.selectJobs));
-  }
-
-  onAdd(): void {
-    // TODO: feel free to modify any files.
-    // NOTE: Only maintain console.log that are useful in debugging
-    console.log("Add button is pressed");
-    this.jobService.addJob();
+    this.jobs$ = this.store.pipe(select(fromJobs.selectJobs)).pipe();
   }
 }

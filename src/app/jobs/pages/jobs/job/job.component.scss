@@ -3,7 +3,7 @@
   padding: 15px;
   background: #fff;
   height: 100%;
-
+  position: relative;
   .job-logo {
     width: 25px;
     height: 25px;
@@ -26,9 +26,41 @@
 
     a {
       color: #353535;
+      word-break: break-all;
+      display: -webkit-box;
+      -webkit-line-claim: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+    a:hover {
+      cursor: pointer;
     }
   }
 
   .action-button {
   }
+}
+.job:hover {
+  .action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    height: 100%;
+  }
+}
+.action {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: 15px;
+}
+
+
+
+.clamp {
+  pointer-events: none;
 }

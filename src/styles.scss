@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-
+@import '~@taiga-ui/core/styles/taiga-ui-local';
 /* RESET */
 
 *,
@@ -17,7 +15,10 @@ a {
     text-decoration: none;
   }
 }
-
+label {
+  margin: 0;
+  padding: 0;
+}
 body {
   background: #f5f6f8;
   font-family: "Roboto", sans-serif;

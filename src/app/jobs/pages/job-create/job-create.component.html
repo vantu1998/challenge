@@ -1,28 +1,67 @@
-<div class="container">
-  <form autocomplete="off" [formGroup]="formData">
+<div class="container form-wrapper">
+  <div class="d-flex justify-content-between align-items-center my-2">
+    <a routerLink="/jobs" class="brand">remotejobs</a>
+  </div>
+  <form autocomplete="off" class="mt-4" [formGroup]="formData">
+    <h3 class="tui-form__header tui-form__header_margin-top_none">
+      {{title}}
+    </h3>
     <div class="d-flex flex-column">
-      <input formControlName="title" type="text" />
-      <input formControlName="logo" type="text" />
-      <input formControlName="company" type="text" />
-      <input formControlName="link" type="text" />
-      <input formControlName="date" type="text" />
-      <select formControlName="type">
-        <option value="0">Part time</option>
-        <option value="1">Full time</option>
-      </select>
+      <tui-input formControlName="title" class="mt-3">
+        Input title
+      </tui-input>
+      <tui-text-area class="mt-3" formControlName="description" [expandable]="true"
+      >
+        Input description for job</tui-text-area
+      >
+      <tui-input formControlName="logo" class="mt-3">
+        Input link to logo image
+      </tui-input>
+      <tui-input formControlName="company" class="mt-3">
+        Input your company name
+      </tui-input>
+      <tui-input formControlName="link" class="mt-3">
+        Input your company website
+      </tui-input>
+
+      <div class="row mt-3">
+        <tui-input-date
+          class="col-6"
+          tuiTextfieldSize="l"
+          formControlName="date"
+        >
+          Choose a date
+        </tui-input-date>
+        <tui-select
+          class="col-6"
+          tuiTextfieldSize="l"
+          formControlName="type"
+          [valueContent]="this.formData.value.type !== null && this.formData.value.type !== undefined ? jobType[this.formData.value.type].label : ''"
+        >
+          Choose job type
+          <ng-template tuiDataList>
+            <tui-data-list>
+              <button *ngFor="let item of jobType" tuiOption [value]="item.value">
+                {{item.label}}
+              </button>
+            </tui-data-list>
+          </ng-template>
+        </tui-select>
+      </div>
+
       <div class="d-flex justify-content-end mt-2">
-        <button class="btn btn-primary mr-3">
+        <button class="btn btn-primary mr-3" *ngIf="mode === 1; else edit" (click)="addJob()">
           Create
         </button>
-        <button class="btn btn-danger">
+        <button class="btn btn-danger" routerLink="/jobs">
           Cancel
         </button>
       </div>
     </div>
   </form>
-
 </div>
-<pre>
-  {{formData.value  | json }}
-  {{formData.valid}}
-</pre>
+<ng-template #edit>
+  <button class="btn btn-primary mr-3" (click)="updateJob()">
+    Update
+  </button>
+</ng-template>

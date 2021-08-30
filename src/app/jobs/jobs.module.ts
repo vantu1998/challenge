@@ -7,7 +7,19 @@ import { JobsComponent } from "./pages/jobs/jobs.component";
 import { JobComponent } from "./pages/jobs/job/job.component";
 import { JobDescriptionComponent } from "./pages/job-description/job-description.component";
 import { JobCreateComponent } from "./pages/job-create/job-create.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {
+  TuiFilterModule,
+  TuiInputDateModule,
+  TuiInputModule,
+  TuiSelectModule,
+  TuiTextAreaModule,
+  TuiDataListWrapperModule,
+  TuiAvatarModule,
+  TuiLineClampModule,
+} from "@taiga-ui/kit";
+import { TuiDataListModule, TuiLabelModule } from "@taiga-ui/core";
+import { TuiTextfieldControllerModule } from "@taiga-ui/core";
 
 @NgModule({
   declarations: [
@@ -21,6 +33,19 @@ import { ReactiveFormsModule } from "@angular/forms";
     FontAwesomeModule,
     JobsRoutingModule,
     ReactiveFormsModule,
+    TuiFilterModule,
+    TuiTextAreaModule,
+    TuiInputModule,
+    TuiInputDateModule,
+    TuiTextfieldControllerModule,
+    TuiSelectModule,
+    TuiSelectModule,
+    TuiDataListModule,
+    TuiDataListWrapperModule,
+    TuiLabelModule,
+    FormsModule,
+    TuiAvatarModule,
+    TuiLineClampModule,
   ],
 })
 export class JobsModule {}

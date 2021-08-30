@@ -5,6 +5,7 @@ import {
   Action,
   createFeatureSelector,
   createSelector,
+  createAction,
 } from "@ngrx/store";
 
 import * as jobsActions from "./jobs.actions";
@@ -23,11 +24,13 @@ const initialState: State = {
   selected: null,
 };
 
+// @ts-ignore
 const jobsReducer = createReducer<State>(
   initialState,
   on(jobsActions.getJobs, (state) => ({
     ...state,
     loading: true,
+    selected: null,
     error: null,
   })),
   on(jobsActions.getJobsSuccess, (state, { jobs }) => ({
@@ -66,7 +69,33 @@ const jobsReducer = createReducer<State>(
     return { ...state, jobs: data, loading: false, selected: null };
   }),
   on(jobsActions.deleteJobError, (state, { error }) => {
-    return { ...state, loading: false, selected: null, error: error };
+    return { ...state, loading: false, error: error };
+  }),
+  on(jobsActions.updateJob, (state, { job }) => {
+    return {
+      ...state,
+      loading: true,
+      selected: job,
+    };
+  }),
+  on(jobsActions.updateJobSuccess, (state, { job }) => {
+    const index = state.jobs.findIndex((item) => item.id === job.id);
+    if (index >= 0) {
+      state.jobs[index] = job;
+    }
+    return { ...state, selected: job, error: null, loading: false };
+  }),
+  on(jobsActions.updateJobError, (state, { error }) => {
+    return { ...state, loading: false, error: error };
+  }),
+  on(jobsActions.getJobById, (state, { id }) => {
+    return { ...state, selected: null, loading: false };
+  }),
+  on(jobsActions.getJobByIdSuccess, (state, { job }) => {
+    return { ...state, selected: job };
+  }),
+  on(jobsActions.getJobByIdFail, (state, { error }) => {
+    return { ...state, loading: false, error: error };
   })
 );
 
@@ -78,4 +107,8 @@ export const selectJobsState = createFeatureSelector<State>("jobsFeature");
 export const selectJobs = createSelector(
   selectJobsState,
   (state) => state.jobs
+);
+export const selectedJobSelector = createSelector(
+  selectJobsState,
+  (state) => state.selected
 );

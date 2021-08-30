@@ -13,7 +13,6 @@ export const getJobsError = createAction(
 );
 
 // Adding Job Actions
-export const addJobLoad = createAction("[Jobs API] Add Job Load");
 export const addJobSuccess = createAction(
   "[Jobs API] Add Job Success",
   props<{ job: Job }>()
@@ -43,6 +42,37 @@ export const deleteJobSuccess = createAction(
 );
 export const deleteJobError = createAction(
   "[Jobs API] Delete Job Error",
+  props<{
+    error: string;
+  }>()
+);
+export const updateJobSuccess = createAction(
+  "[Jobs API] Update Job Success",
+  props<{ job: Job }>()
+);
+export const updateJobError = createAction(
+  "[Jobs API] Add Job Error",
+  props<{
+    error: string;
+  }>()
+);
+
+// TODO: add additional actions for other CRUD operations
+
+export const updateJob = createAction(
+  "[Jobs API] Update Job",
+  props<{ job: Job }>()
+);
+export const getJobById = createAction(
+  "[Jobs API] Get Job By Id",
+  props<{ id: string }>()
+);
+export const getJobByIdSuccess = createAction(
+  "[Jobs API] Get Job By Id Success",
+  props<{ job: Job | undefined }>()
+);
+export const getJobByIdFail = createAction(
+  "[Jobs API] Get Job By Id Fail",
   props<{
     error: string;
   }>()

@@ -11,4 +11,5 @@ export interface Job {
   link: string;
   date: string;
   type: JobType;
+  description: string;
 }
