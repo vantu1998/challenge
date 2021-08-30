@@ -14,7 +14,6 @@ export class JobsService {
   constructor(private afs: AngularFirestore) {}
 
   getJobs(): Observable<Job[]> {
-    // TODO: replace this one with an actual call to a API or json-server
     return this.afs.collection<Job>("jobs").valueChanges({ idField: "id" });
   }
 
@@ -41,19 +40,22 @@ export class JobsService {
   }
 
   search(title?: string, type?: number) {
-    return this.afs
-      .collection<Job>("jobs", (ref) => {
-        let query:
-          | firebase.firestore.CollectionReference
-          | firebase.firestore.Query = ref;
-        if (type) {
-          query = query.where("type", "==", 1);
-        }
-        // if (title) {
-        //   query = query.where("title", "array-contains", title);
-        // }
-        return query;
+    return this.getJobs().pipe(
+      map((jobs) => {
+        return jobs.filter((item) => {
+          let isMatchType = true;
+          let isMatchTitle = true;
+          if (type) {
+            isMatchType = item.type === type;
+          }
+          if (title) {
+            isMatchTitle = item.title
+              .toLocaleLowerCase()
+              .includes(title.toLocaleLowerCase());
+          }
+          return isMatchTitle && isMatchType;
+        });
       })
-      .valueChanges();
+    );
   }
 }
