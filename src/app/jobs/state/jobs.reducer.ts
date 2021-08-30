@@ -80,7 +80,6 @@ const jobsReducer = createReducer<State>(
   }),
   on(jobsActions.updateJobSuccess, (state, { job }) => {
     const index = state.jobs.findIndex((item) => {
-      debugger;
       return item.id === job.id;
     });
     if (index >= 0) {

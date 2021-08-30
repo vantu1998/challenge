@@ -16,7 +16,7 @@ import {
   TuiTextAreaModule,
   TuiDataListWrapperModule,
   TuiAvatarModule,
-  TuiLineClampModule,
+  TuiMultiSelectModule,
 } from "@taiga-ui/kit";
 import { TuiDataListModule, TuiLabelModule } from "@taiga-ui/core";
 import { TuiTextfieldControllerModule } from "@taiga-ui/core";
@@ -39,13 +39,12 @@ import { TuiTextfieldControllerModule } from "@taiga-ui/core";
     TuiInputDateModule,
     TuiTextfieldControllerModule,
     TuiSelectModule,
-    TuiSelectModule,
     TuiDataListModule,
     TuiDataListWrapperModule,
     TuiLabelModule,
     FormsModule,
     TuiAvatarModule,
-    TuiLineClampModule,
+    TuiMultiSelectModule, 
   ],
 })
 export class JobsModule {}

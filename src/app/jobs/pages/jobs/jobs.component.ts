@@ -4,11 +4,10 @@ import { Observable } from "rxjs";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { Job } from "../../../shared/models/jobs";
-import * as jobsActions from "../../state/jobs.actions";
 import * as fromJobs from "../../state/jobs.reducer";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { debounce, debounceTime } from "rxjs/operators";
+import { debounceTime } from "rxjs/operators";
 import { search } from "../../state/jobs.actions";
 import { JobsService } from "../../../jobs.service";
 
@@ -39,4 +38,18 @@ export class JobsComponent implements OnInit {
       this.store.dispatch(search(data));
     });
   }
+  readonly jobType = [
+    { value: 0, label: "Full time" },
+    { value: 1, label: "Part time" },
+  ];
+  readonly items = [
+    'News',
+    'Food',
+    'Clothes',
+    'Popular',
+    'Goods',
+    'Furniture',
+    'Tech',
+    'Building materials',
+];
 }

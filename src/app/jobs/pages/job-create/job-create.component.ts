@@ -45,8 +45,19 @@ export class JobCreateComponent implements OnInit {
       this.title = "Edit job";
       // @ts-ignore
       this.store.pipe(select(selectedJobSelector)).subscribe((data: Job) => {
-        this.job = JSON.parse(JSON.stringify(data));
-        this.formData.patchValue(data);
+        if (data) {
+          this.job = JSON.parse(JSON.stringify(data));
+          const dates = data?.date?.split("-").map((item) => Number(item));
+          this.formData.patchValue({
+            title: data.title,
+            logo: data.logo,
+            company: data.company,
+            link: data.link,
+            description: data.description,
+            type: data.type,
+            date: new TuiDay(dates[0], dates[1], dates[2]),
+          });
+        }
       });
     } else {
       this.title = "Create job";
@@ -78,6 +89,7 @@ export class JobCreateComponent implements OnInit {
   updateJob() {
     const job = this.formData.value;
     job.id = this.job.id;
+    job.date = job.date.toJSON();
     this.store.dispatch(updateJob({ job }));
   }
 }
