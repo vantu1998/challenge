@@ -38,9 +38,6 @@
       cursor: pointer;
     }
   }
-
-  .action-button {
-  }
 }
 .job:hover {
   .action {
@@ -61,4 +58,7 @@
 
 .clamp {
   pointer-events: none;
+}
+a {
+  word-break: break-all;
 }
