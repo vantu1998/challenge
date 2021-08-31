@@ -44,7 +44,6 @@ export class JobsComponent implements OnInit {
       this.jobs$ = this.store.pipe(select(fromJobs.selectJobs)).pipe(
         map((data) => {
           return data.filter((item) => {
-            debugger;
             const isMatchTitle = filter.title
               ? filter.title === item.title || filter.title === "All"
               : true;
