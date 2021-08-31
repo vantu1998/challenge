@@ -44,7 +44,7 @@ import { TuiTextfieldControllerModule } from "@taiga-ui/core";
     TuiLabelModule,
     FormsModule,
     TuiAvatarModule,
-    TuiMultiSelectModule, 
+    TuiMultiSelectModule,
   ],
 })
 export class JobsModule {}

@@ -76,8 +76,7 @@ export class JobsEffects {
     this.actions$.pipe(
       ofType(fromJobs.search),
       switchMap((action) => {
-        console.log(action);
-        return this.jobsService.search(action.title, action.typeJob).pipe(
+        return this.jobsService.search(action.title).pipe(
           map((jobs) => {
             return fromJobs.searchSuccess({ jobs });
           })
@@ -85,7 +84,6 @@ export class JobsEffects {
       })
     )
   );
-
   constructor(
     private actions$: Actions,
     private jobsService: JobsService,

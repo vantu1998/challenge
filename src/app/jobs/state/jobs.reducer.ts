@@ -10,11 +10,18 @@ import {
 
 import * as jobsActions from "./jobs.actions";
 
+export interface FilterCategory {
+  title: string[];
+  company: string[];
+}
+
 export interface State {
   jobs: Job[];
   loading: boolean;
   error: string | null;
   selected?: Job | null;
+  filterCategory: FilterCategory;
+  jobFilterResult: Job[];
 }
 
 const initialState: State = {
@@ -22,6 +29,8 @@ const initialState: State = {
   loading: false,
   error: null,
   selected: null,
+  filterCategory: { title: ["All"], company: ["All"] },
+  jobFilterResult: [],
 };
 
 // @ts-ignore
@@ -33,12 +42,23 @@ const jobsReducer = createReducer<State>(
     selected: null,
     error: null,
   })),
-  on(jobsActions.getJobsSuccess, (state, { jobs }) => ({
-    ...state,
-    loading: false,
-    error: null,
-    jobs,
-  })),
+  on(jobsActions.getJobsSuccess, (state, { jobs }) => {
+    let filterCategory: FilterCategory = { title: ["All"], company: ["All"] };
+    jobs.forEach((item) => {
+      if (item.title && item.company) {
+        filterCategory.title = [...filterCategory.title, item.title];
+        filterCategory.company = [...filterCategory.company, item.company];
+      }
+    });
+    return {
+      ...state,
+      filterCategory: filterCategory,
+      loading: false,
+      error: null,
+      jobs,
+      jobFilterResult: [],
+    };
+  }),
   on(jobsActions.getJobsError, (state, { error }) => ({
     ...state,
     loading: false,
@@ -109,6 +129,12 @@ const jobsReducer = createReducer<State>(
       ...state,
       jobs,
     };
+  }),
+  on(jobsActions.filterSuccess, (state, { job }) => {
+    return {
+      ...state,
+      jobFilterResult: job,
+    };
   })
 );
 
@@ -124,4 +150,12 @@ export const selectJobs = createSelector(
 export const selectedJobSelector = createSelector(
   selectJobsState,
   (state) => state.selected
+);
+export const filterCategory = createSelector(
+  selectJobsState,
+  (state) => state.filterCategory
+);
+export const jobFilterResult = createSelector(
+  selectJobsState,
+  (state) => state.jobFilterResult
 );

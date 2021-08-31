@@ -39,21 +39,19 @@ export class JobsService {
     return from(result);
   }
 
-  search(title?: string, type?: number) {
+  search(title?: string) {
+    title = title?.toLocaleLowerCase();
     return this.getJobs().pipe(
       map((jobs) => {
         return jobs.filter((item) => {
-          let isMatchType = true;
-          let isMatchTitle = true;
-          if (type) {
-            isMatchType = item.type === type;
-          }
+          let isMath = true;
           if (title) {
-            isMatchTitle = item.title
-              .toLocaleLowerCase()
-              .includes(title.toLocaleLowerCase());
+            isMath =
+              item.title?.toLocaleLowerCase().includes(title) ||
+              item.company?.toLocaleLowerCase().includes(title) ||
+              item.description?.toLocaleLowerCase().includes(title);
           }
-          return isMatchTitle && isMatchType;
+          return isMath;
         });
       })
     );
