@@ -2,8 +2,10 @@
   <div class="data" (click)="goToDetail(job)">
     <img [src]="job.logo" class="job-logo" />
     <div class="job-meta">
-      <span class="job-posted">{{job.date | date :'dd-MMM-yyyy'}}</span>
-      <span>{{ job.type === JobType.FullTime ? "Full Time" : "Part Time" }}</span>
+      <span class="job-posted">{{ job.date | date: "dd-MMM-yyyy" }}</span>
+      <span>{{
+        job.type === JobType.FullTime ? "Full Time" : "Part Time"
+      }}</span>
     </div>
     <div class="job-title">
       <a>{{ job.title }}</a>
@@ -19,5 +21,4 @@
       <fa-icon [icon]="faTrash"></fa-icon>
     </button>
   </div>
-
 </div>
