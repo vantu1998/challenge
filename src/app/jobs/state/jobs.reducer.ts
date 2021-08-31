@@ -46,8 +46,12 @@ const jobsReducer = createReducer<State>(
     let filterCategory: FilterCategory = { title: ["All"], company: ["All"] };
     jobs.forEach((item) => {
       if (item.title && item.company) {
-        filterCategory.title = [...filterCategory.title, item.title];
-        filterCategory.company = [...filterCategory.company, item.company];
+        if (!filterCategory.title.includes(item.title)) {
+          filterCategory.title = [...filterCategory.title, item.title];
+        }
+        if (!filterCategory.company.includes(item.company)) {
+          filterCategory.company = [...filterCategory.company, item.company];
+        }
       }
     });
     return {
